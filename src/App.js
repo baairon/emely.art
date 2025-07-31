@@ -1,41 +1,39 @@
-import React, { useState } from "react";
+// App.js
+import React, { useState, useEffect } from "react";
 import "./App.css";
+
+const pieces = [
+  { src: "/artwork/cat1.jpg", title: "Little Loaf",  medium: "Procreate / Digital Art", date: "01/10/2025", category: "Digital" },
+  { src: "/artwork/cat2.jpg", title: "Sunshine Gatito", medium: "Procreate / Digital Art", date: "02/11/2025", category: "Digital" },
+  { src: "/artwork/buba1.jpg", title: "Buba",          medium: "Procreate / Digital Art", date: "03/14/2025", category: "Digital" },
+  { src: "/artwork/buba2.jpg", title: "My Honest Reaction", medium: "Procreate / Digital Art", date: "03/14/2025", category: "Digital" },
+];
+
+function Slideshow({ slides, interval = 5000 }) {
+  const [idx, setIdx] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => setIdx((i) => (i + 1) % slides.length), interval);
+    return () => clearInterval(id);
+  }, [slides.length, interval]);
+
+  return (
+    <div className="slideshow">
+      {slides.map((s, i) => (
+        <figure
+          key={s.src}
+          className={`slideshow__slide ${i === idx ? "is-active" : ""}`}
+          style={{ backgroundImage: `url(${s.src})` }}
+          aria-label={s.title}
+        />
+      ))}
+    </div>
+  );
+}
 
 export default function App() {
   const [view, setView] = useState("home");
   const [category, setCategory] = useState("All");
-
-  const pieces = [
-    {
-      src: "/artwork/cat1.jpg",
-      title: "Little Loaf",
-      medium: "Procreate / Digital Art",
-      date: "01/10/2025",
-      category: "Digital",
-    },
-    {
-      src: "/artwork/cat2.jpg",
-      title: "Sunshine Gatito",
-      medium: "Procreate / Digital Art",
-      date: "02/11/2025",
-      category: "Digital",
-    },
-  {
-      src: "/artwork/buba1.jpg",          // ← new piece
-      title: "Buba",
-      medium: "Procreate / Digital Art",
-      date: "03/14/2025",
-      category: "Digital",
-    },
-    {
-      src: "/artwork/buba2.jpg",          // ← new piece
-      title: "My Honest Reaction",
-      medium: "Procreate / Digital Art",
-      date: "03/14/2025",
-      category: "Digital",
-    },
-  ];
-
   const cats = ["All", "Digital", "Pencil", "Colored Pencil"];
 
   const NavLink = ({ label }) => (
@@ -61,37 +59,14 @@ export default function App() {
       <main>
         {view === "home" && (
           <section className="home fade">
-            <h1 className="logo">
-              EMELY.<span className="logo__light">ART</span>
-            </h1>
-            <p className="tagline">Art Portfolio — 2025</p>
+            <Slideshow slides={pieces} />
 
-            <button
-              className="cta"
-              type="button"
-              aria-label="View gallery"
-              onClick={() => setView("gallery")}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <line x1="4" y1="12" x2="20" y2="12" />
-                <polyline points="13 5 20 12 13 19" />
-              </svg>
-            </button>
           </section>
         )}
 
         {view === "gallery" && (
           <section className="gallery fade">
             <h2 className="visually-hidden">Gallery</h2>
-
-            <span className="divider" aria-hidden="true" />
 
             <div className="filter-wrap">
               <div className="filter">
@@ -136,16 +111,14 @@ export default function App() {
 
         {view === "about" && (
           <section className="about fade">
-            <h2>About</h2>
             <p>Short bio or statement goes here.</p>
           </section>
         )}
       </main>
 
-      {/* ─────────── footer ─────────── */}
       <footer className="site-footer fade">
         <span className="divider" aria-hidden="true"></span>
-        <p className="footer-text">© 2025 Emely Recinos. All rights reserved.</p>
+        <p className="footer-text">© 2025 Emely Recinos. All rights reserved.</p>
       </footer>
     </>
   );
