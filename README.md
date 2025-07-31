@@ -10,17 +10,19 @@ It will host the artwork of an aspiring tattoo professional whose goal is to bui
 ## Build workflow (internal)  
 
 ```bash
-npm run build  
+# 1- Build the new static files
+npm run build
 
-rm -rf docs && mkdir docs  
+# 2- Replace docs with the fresh build
+rm -rf docs && mkdir docs
+cp -r build/* docs/
 
-cp -r build/* docs/  
+# 3- Stage every change (code + docs)
+git add -A            # or `git add .`
 
-git add docs  
-
-git commit -m "Site update"  
-
-git push  
+# 4- Commit and ship it
+git commit -m "Site and docs update"
+git push
 ```  
 
 ## Folder overview  
