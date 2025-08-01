@@ -1,4 +1,3 @@
-// App.js
 import React, { useState, useEffect } from "react";
 import "./App.css";
 
@@ -146,7 +145,7 @@ export default function App() {
       <footer className="site-footer fade">
         <span className="divider" aria-hidden="true"></span>
       <p className="footer-text">
-        © 2025 Emely Recinos.<a href="https://bairon.dev" target="_blank" rel="noopener noreferrer"> Built with ❤︎ by Ale</a>
+        © 2025 Emely R.<a href="https://bairon.dev" target="_blank" rel="noopener noreferrer"> Built with ❤︎ by Ale</a>
         </p>
       </footer>
 

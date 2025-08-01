@@ -1,5 +1,7 @@
+/* Import Google Font: Inter for typography */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap");
 
+/* Root theme variables used across React components */
 :root {
   --black: #000;
   --white: #fff;
@@ -14,11 +16,13 @@
   font-weight: 300;
 }
 
+/* Global box-sizing and reset for all elements */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
 }
 
+/* Utility class: visually hide content but keep it accessible */
 .visually-hidden {
   position: absolute;
   inset: 0;
@@ -28,6 +32,7 @@
   clip-path: inset(50%);
 }
 
+/* Fade-in animation keyframes and helper class used in <main> views */
 @keyframes fadeIn {
   from { opacity: 0 }
   to   { opacity: 1 }
@@ -36,7 +41,7 @@
   animation: fadeIn .35s ease;
 }
 
-/* ─── header / frosted nav ─── */
+/* Header component (.site-header) styling for sticky frosted nav */
 .site-header {
   position: sticky;
   top: 0;
@@ -49,14 +54,14 @@
   box-shadow: 0 1px 3px rgba(0,0,0,.08);
 }
 
-/* ─── layout padding ─── */
+/* Layout padding for main pages: Home, filter container, and grid views */
 .home,
 .filter-wrap,
 .grid {
   padding-inline: var(--gap);
 }
 
-/* ─── nav ─── */
+/* Navigation bar (.nav) and NavLink component styling */
 .nav {
   display: flex;
   justify-content: center;
@@ -93,7 +98,7 @@
   left: 20%;
 }
 
-/* ─── filter buttons ─── */
+/* Filter buttons in Gallery view (filter__btn) */
 .filter__btn {
   padding: clamp(.4rem,1.6vw,.6rem) clamp(.9rem,4vw,1.4rem);
   background: var(--white);
@@ -120,7 +125,7 @@
   transform: translateY(0);
 }
 
-/* ─── responsive nav/buttons ─── */
+/* Responsive adjustments for nav and filter buttons under 600px */
 @media (max-width: 599px) {
   .nav { gap: .4rem; }
   .filter { gap: .4rem; }
@@ -128,7 +133,7 @@
   .filter__btn { padding: .6rem 1.4rem; font-size: .83rem; }
 }
 
-/* ─── home section ─── */
+/* Home view container styling (.home) used in App.js when view is "home" */
 .home {
   display: flex;
   flex-direction: column;
@@ -140,7 +145,7 @@
   min-height: calc(75vh - 7rem);
 }
 
-/* ─── slideshow ─── */
+/* Slideshow component container and overlay (.slideshow) */
 .slideshow {
   position: relative;
   width: 100%;
@@ -157,7 +162,8 @@
   pointer-events: none;
   z-index: 1;
 }
-/* CTA pill */
+
+/* CTA button inside Slideshow (slideshow__cta) */
 .slideshow__cta {
   position: absolute;
   top: 50%;
@@ -182,6 +188,7 @@
   transform: translate(-50%, -50%) scale(1.02);
 }
 
+/* Aspect ratio adjustments for smaller screens */
 @media (max-width: 899px) {
   .slideshow { aspect-ratio: 4/3; }
 }
@@ -189,6 +196,7 @@
   .slideshow { aspect-ratio: 3/4; }
 }
 
+/* Individual slide styling (.slideshow__slide) */
 .slideshow__slide {
   position: absolute;
   inset: 0;
@@ -202,7 +210,7 @@
   opacity: 1;
 }
 
-/* ─── home intro block ─── */
+/* Home intro text block (.home-intro) shown on Gallery view switch */
 .home-intro {
   align-self: flex-start;
   padding-inline: var(--gap);
@@ -231,7 +239,7 @@
   .home-bio { font-size: clamp(.95rem,3.5vw,1.05rem); }
 }
 
-/* ─── gallery section ─── */
+/* Gallery section wrapper (.gallery) and divider lines */
 .gallery {
   padding-block: var(--gap);
   padding-inline: calc(var(--gap) * 0.5);
@@ -252,7 +260,7 @@
   border-radius: 1px;
 }
 
-/* ─── filter wrap & fade ─── */
+/* Filter wrap container and fade overlay (.filter-wrap, .filter-fade) */
 .filter-wrap {
   position: relative;
   margin-bottom: 2.4rem;
@@ -276,7 +284,7 @@
   background: linear-gradient(to right, rgba(255,255,255,0) 10%, var(--white) 90%);
 }
 
-/* ─── grid layout ─── */
+/* Grid layout for card components (.grid) */
 .grid {
   display: grid;
   gap: var(--gap);
@@ -284,7 +292,7 @@
 @media (min-width: 600px) { .grid { grid-template-columns: repeat(2,1fr); } }
 @media (min-width: 900px) { .grid { grid-template-columns: repeat(3,1fr); } }
 
-/* ─── cards ─── */
+/* Card components (.card, .card__img, .card__body, etc.) */
 .card {
   background: var(--white);
   border-radius: var(--radius-card);
@@ -324,7 +332,7 @@
   display: block;
 }
 
-/* ─── footer & about ─── */
+/* Footer component (.site-footer) */
 .site-footer {
   padding: 2rem var(--gap) 3rem;
   text-align: center;
@@ -339,13 +347,13 @@
   text-decoration: none !important;
 }
 
-/* ─── about section (scrollable) ─── */
+/* About section styling (.about) for About view */
 .about {
   max-width: 60ch;
   margin: 0 auto;
   padding: calc(var(--gap) * 1.5) var(--gap) 2rem;
-  max-height: 100vh;
-  overflow-y: auto;
+  max-height: none;
+  overflow: visible;
 }
 .about p {
   font-size: .95rem;
@@ -353,14 +361,13 @@
   line-height: 1.6;
   margin-bottom: 1.5em;
 }
-
 @media (max-width: 599px) {
   .about {
     padding: calc(var(--gap) * 2) var(--gap);
   }
 }
 
-/* ─── lightbox modal ─── */
+/* Lightbox modal structure for image preview in React state */
 .image-modal {
   position: fixed;
   top: 0; left: 0;
@@ -389,14 +396,18 @@
   max-height: 100vh;
   object-fit: contain;
 }
+
+/* Close button for modal with safe-area inset support */
 .image-modal__close {
-  position: absolute;
-  top: 1rem; right: 1rem;
+  position: fixed;
+  top: env(safe-area-inset-top, clamp(1rem, 3vh, 2rem));
+  right: env(safe-area-inset-right, clamp(1rem, 3vw, 2rem));
   background: none;
   border: none;
   color: #fff;
-  font-size: 2rem;
+  font-size: 2.5rem;
+  font-weight: 100;
   line-height: 1;
   cursor: pointer;
-  z-index: 2;
+  z-index: 999;
 }
