@@ -185,7 +185,6 @@
 }
 .slideshow__cta:hover {
   filter: brightness(1.1);
-  transform: translate(-50%, -50%) scale(1.02);
 }
 
 /* Aspect ratio adjustments for smaller screens */
