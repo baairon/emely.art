@@ -398,16 +398,30 @@
 }
 
 /* Close button for modal with safe-area inset support */
+/* ── modal close button ── */
 .image-modal__close {
   position: fixed;
-  top: env(safe-area-inset-top, clamp(1rem, 3vh, 2rem));
-  right: env(safe-area-inset-right, clamp(1rem, 3vw, 2rem));
+
+  /* 1 rem gutter + any notch / punch-hole inset */
+  top:   calc(env(safe-area-inset-top, 0px)   + 0.5rem);
+  right: calc(env(safe-area-inset-right, 0px) + 0.5rem);
+
+  /* larger tap target without affecting the glyph size */
+  width: 3.25rem;
+  height: 3.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   background: none;
   border: none;
   color: #fff;
-  font-size: 2.5rem;
-  font-weight: 100;
+
+  /* scales from phones to 4 K monitors */
+  font-size: clamp(1.75rem, 3vw, 3rem);
+
   line-height: 1;
   cursor: pointer;
   z-index: 999;
+  touch-action: manipulation; /* avoids 300 ms delay on mobile */
 }
