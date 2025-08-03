@@ -177,7 +177,7 @@
   border: 1px solid rgba(255,255,255,0.8);
   padding: .75rem 1.6rem;
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 300;
   border-radius: var(--radius-pill);
   cursor: pointer;
   white-space: nowrap;
