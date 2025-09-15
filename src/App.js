@@ -44,6 +44,7 @@ export default function App() {
   const [category, setCategory] = useState("All");
   const [selectedImage, setSelectedImage] = useState(null);
   const cats = ["All", "Digital", "Pencil", "Colored Pencil"];
+  const filteredPieces = pieces.filter(p => category === "All" || p.category === category);
 
   const NavLink = ({ label }) => (
     <button
@@ -95,10 +96,9 @@ export default function App() {
               <span className="filter-fade" aria-hidden="true" />
             </div>
 
-            <div className="grid fade">
-              {pieces
-                .filter(p => category === "All" || p.category === category)
-                .map(p => (
+            {filteredPieces.length > 0 ? (
+              <div className="grid fade">
+                {filteredPieces.map(p => (
                   <article
                     className="card"
                     key={p.title}
@@ -120,7 +120,17 @@ export default function App() {
                     </header>
                   </article>
                 ))}
-            </div>
+              </div>
+            ) : (
+              <div className="empty-state fade" role="status" aria-live="polite">
+                <h3 className="empty-state__title">No artworks here yet</h3>
+                <p className="empty-state__text">
+                  {category === "All"
+                    ? "There aren’t any artworks to display right now. Please check back soon."
+                    : `There aren’t any ${category.toLowerCase()} artworks to display right now. Please check back soon.`}
+                </p>
+              </div>
+            )}
           </section>
         )}
 
