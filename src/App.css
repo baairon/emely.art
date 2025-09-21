@@ -390,11 +390,55 @@
   align-items: center;
   justify-content: center;
 }
+.image-modal__nav {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #fff;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 998;
+}
+.image-modal__nav--left { left: 1rem; }
+.image-modal__nav--right { right: 1rem; }
+.image-modal__nav:hover { }
+.image-modal__nav svg { width: 1.35rem; height: 1.35rem; }
+
+/* Desktop-only: show nav chevrons */
+@media (min-width: 900px) {
+  .image-modal__nav { display: inline-flex; }
+}
 .image-modal__content img {
   max-width: 100vw;
   max-height: 100vh;
   object-fit: contain;
 }
+
+/* Subtle fade-in when opening the image modal */
+@keyframes modalFadeIn {
+  from { opacity: 0 }
+  to   { opacity: 1 }
+}
+.image-modal,
+.image-modal__overlay {
+  animation: modalFadeIn .25s ease;
+}
+@keyframes modalImageIn {
+  from { opacity: 0; transform: scale(.995) }
+  to   { opacity: 1; transform: scale(1) }
+}
+.image-modal__content img {
+  opacity: 0;
+  transform: scale(.995);
+  animation: modalImageIn .28s ease forwards;
+}
+
+/* Ensure the close icon matches chevron size */
+.image-modal__close svg { width: 1.35rem; height: 1.35rem; }
 
 /* Close button for modal with safe-area inset support */
 /* ── modal close button ── */
