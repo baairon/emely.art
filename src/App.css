@@ -5,7 +5,7 @@
 :root {
   --black: #000;
   --white: #fff;
-  --radius-pill: 2rem;
+  --radius-pill: 1.25rem;
   --radius-card: .75rem;
   --shadow-pill: 0 3px 10px rgba(0,0,0,.10);
   --shadow-card: 0 4px 20px rgba(0,0,0,.08);
