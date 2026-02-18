@@ -6,7 +6,8 @@ const pieces = [
   { src: "/artwork/cat2.jpg", title: "Sunshine Gatito", medium: "Procreate / Digital Art", date: "02/11/2025", category: "Digital" },
   { src: "/artwork/buba1.jpg", title: "Percy",          medium: "Procreate / Digital Art", date: "03/14/2025", category: "Digital" },
   { src: "/artwork/buba2.jpg", title: "Honest Reaction", medium: "Procreate / Digital Art", date: "03/14/2025", category: "Digital" },
-  { src: "/artwork/uc.jpg", title: "Unit Circle", medium: "Acrylic on Canvas / Painting", date: "10/23/2025", category: "Painting"}
+  { src: "/artwork/uc.jpg", title: "Unit Circle", medium: "Acrylic on Canvas / Painting", date: "10/23/2025", category: "Painting"},
+  { src: "/artwork/thurgoodmarshall.jpeg", title: "Thurgood Marshall", medium: "Pencil on Paper / Drawing", date: "02/17/2026", category: "Pencil" }
 ];
 
 function Slideshow({ slides, interval = 5000, onViewClick }) {
