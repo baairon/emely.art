@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef, useCallback } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import "./App.css";
 
@@ -95,21 +95,6 @@ function GalleryView({ pieces, onSelect, visible }) {
 export default function App() {
   const [view, setView] = useState("home");
   const [selectedIndex, setSelectedIndex] = useState(null);
-  const headerRef = useRef(null);
-
-  const syncHeaderHeight = useCallback(() => {
-    if (headerRef.current) {
-      document.documentElement.style.setProperty(
-        "--header-h", headerRef.current.offsetHeight + "px"
-      );
-    }
-  }, []);
-
-  useEffect(() => {
-    syncHeaderHeight();
-    window.addEventListener("resize", syncHeaderHeight);
-    return () => window.removeEventListener("resize", syncHeaderHeight);
-  }, [syncHeaderHeight]);
 
   const NavLink = ({ label }) => (
     <button
@@ -123,7 +108,7 @@ export default function App() {
 
   return (
     <>
-      <header className="site-header" ref={headerRef}>
+      <header className="site-header">
         <nav className="nav" aria-label="Primary">
           <NavLink label="Home" />
           <NavLink label="Gallery" />

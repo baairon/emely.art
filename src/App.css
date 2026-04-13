@@ -5,6 +5,7 @@
   --text: #f0f0f0;
   --text-muted: rgba(255, 255, 255, .45);
   --gap: clamp(0.4rem, 1.5vw, 0.75rem);
+  --header-h: 2.82rem;
   font-family: "Cormorant Garamond", Georgia, serif;
   font-weight: 300;
 }
@@ -38,6 +39,7 @@ body {
   z-index: 1000;
   background: #000;
   padding: 0.5rem 0;
+  height: var(--header-h);
 }
 
 .nav {
@@ -88,6 +90,7 @@ body {
 }
 
 @media (max-width: 599px) {
+  :root { --header-h: 2.7rem; }
   .nav__link {
     padding: 0.4rem 0.9rem;
     font-size: 0.75rem;
