@@ -150,7 +150,7 @@ export default function App() {
           transition={{ duration: 0.4, delay: view === "gallery" ? 1.4 : 0 }}
         >
           <p className="footer-text">
-            &copy; 2025 Emely Recinos Monjaras. <a href="https://bairon.dev" target="_blank" rel="noopener noreferrer">Built with ♡ by Ale.</a>
+            &copy; {new Date().getFullYear()} Emely Recinos Monjaras. <a href="https://bairon.dev" target="_blank" rel="noopener noreferrer">Built with ♡ by Ale.</a>
           </p>
         </motion.footer>
       )}
