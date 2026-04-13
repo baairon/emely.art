@@ -1,22 +1,14 @@
-/* Import Google Font: Inter for typography */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&display=swap");
 
-/* Root theme variables used across React components */
 :root {
-  --black: #000;
-  --white: #fff;
-  --radius-pill: 6px;
-  --radius-card: 5px;
-  --shadow-pill: 0 3px 10px rgba(0, 0, 0, .10);
-  --shadow-card: 0 4px 20px rgba(0, 0, 0, .08);
-  --gap: clamp(1.25rem, 6vw, 2rem);
-  --hero-gap: 1.2rem;
-  --hero-block-gap: .8rem;
-  font-family: "Inter", system-ui, sans-serif;
+  --bg: #000;
+  --text: #f0f0f0;
+  --text-muted: rgba(255, 255, 255, .45);
+  --gap: clamp(0.4rem, 1.5vw, 0.75rem);
+  font-family: "Cormorant Garamond", Georgia, serif;
   font-weight: 300;
 }
 
-/* Global box-sizing and reset for all elements */
 *,
 *::before,
 *::after {
@@ -24,427 +16,244 @@
   margin: 0;
 }
 
-/* Utility class: visually hide content but keep it accessible */
-.visually-hidden {
-  position: absolute;
-  inset: 0;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
+body {
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
 }
 
-/* Fade-in animation keyframes and helper class used in <main> views */
 @keyframes fadeIn {
-  from {
-    opacity: 0
-  }
-
-  to {
-    opacity: 1
-  }
+  from { opacity: 0 }
+  to   { opacity: 1 }
 }
 
 .fade {
   animation: fadeIn .35s ease;
 }
 
-/* Header component (.site-header) styling for sticky frosted nav */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.75);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  padding-top: calc(var(--gap) * .8);
-  padding-bottom: calc(var(--gap) * .7);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, .08);
+  background: #000;
+  padding: 0.5rem 0;
 }
 
-/* Layout padding for main pages: Home, filter container, and grid views */
-.home,
-.filter-wrap,
-.grid {
-  padding-inline: var(--gap);
-}
-
-/* Navigation bar (.nav) and NavLink component styling */
 .nav {
   display: flex;
   justify-content: center;
-  gap: clamp(.6rem, 3vw, 1.1rem);
+  gap: 0.25rem;
 }
 
 .nav__link {
-  padding: clamp(.35rem, 1.4vw, .55rem) clamp(1rem, 4.5vw, 1.6rem);
+  padding: 0.4rem 1.2rem;
   background: none;
-  color: var(--black);
+  color: var(--text-muted);
   border: none;
   cursor: pointer;
   white-space: nowrap;
   font-family: inherit;
-  font-weight: 300;
-  font-size: 1rem;
+  font-weight: 400;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   position: relative;
-  transition: transform .15s, filter .15s;
+  transition: color .2s;
+}
+
+.nav__link.is-active {
+  color: var(--text);
 }
 
 .nav__link::after {
   content: "";
   position: absolute;
   left: 50%;
-  bottom: -0.15rem;
+  bottom: 0;
   width: 0;
   height: 1px;
-  background: rgba(0, 0, 0, .12);
-  opacity: .4;
-  border-radius: 0;
+  background: rgba(255, 255, 255, .3);
   transition: width .25s ease, left .25s ease;
 }
 
 .nav__link.is-active::after,
 .nav__link:hover::after {
-  width: 60%;
-  left: 20%;
+  width: 50%;
+  left: 25%;
 }
 
-/* Filter buttons in Gallery view (filter__btn) */
-.filter__btn {
-  padding: clamp(.4rem, 1.6vw, .6rem) clamp(.9rem, 4vw, 1.4rem);
-  background: var(--white);
-  color: var(--black);
-  border: none;
-  border-radius: var(--radius-pill);
-  cursor: pointer;
-  white-space: nowrap;
-  font-family: inherit;
-  font-weight: 300;
-  font-size: 1rem;
-  transition: transform .15s, filter .15s;
+.nav__link:hover {
+  color: var(--text);
 }
 
-.filter__btn.is-active {
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, .08));
-}
-
-.nav__link:hover:not(.is-active),
-.filter__btn:hover:not(.is-active) {
-  transform: translateY(-1px);
-  filter: brightness(1.05);
-}
-
-.nav__link:active,
-.filter__btn:active {
-  transform: translateY(0);
-}
-
-/* Responsive adjustments for nav and filter buttons under 600px */
 @media (max-width: 599px) {
-  .nav {
-    gap: .4rem;
-  }
-
-  .filter {
-    gap: .4rem;
-  }
-
   .nav__link {
-    padding: .5rem 1.4rem;
-    font-size: .83rem;
-  }
-
-  .filter__btn {
-    padding: .6rem 1.4rem;
-    font-size: .83rem;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.75rem;
   }
 }
 
-/* Home view container styling (.home) used in App.js when view is "home" */
 .home {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding-inline: 0;
-  gap: var(--hero-gap);
-  text-align: center;
-  min-height: calc(75vh - 7rem);
+  padding: 0;
 }
 
-/* Slideshow component container and overlay (.slideshow) */
 .slideshow {
   position: relative;
   width: 100%;
-  aspect-ratio: 16/9;
-  max-height: 80vh;
-  margin: 0;
+  height: calc(100dvh - var(--header-h, 0px));
   overflow: hidden;
 }
 
-.slideshow::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* CTA button inside Slideshow (slideshow__cta) */
-.slideshow__cta {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  background: rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  padding: .75rem 1.6rem;
-  font-size: 1rem;
-  font-weight: 300;
-  border-radius: var(--radius-pill);
-  cursor: pointer;
-  white-space: nowrap;
-  transition: filter .15s, transform .15s;
-}
-
-.slideshow__cta:hover {
-  filter: brightness(1.1);
-}
-
-/* Aspect ratio adjustments for smaller screens */
-@media (max-width: 899px) {
-  .slideshow {
-    aspect-ratio: 4/3;
-  }
-}
-
-@media (max-width: 599px) {
-  .slideshow {
-    aspect-ratio: 3/4;
-  }
-}
-
-/* Individual slide styling (.slideshow__slide) */
 .slideshow__slide {
   position: absolute;
   inset: 0;
   background-size: cover;
   background-position: center;
   opacity: 0;
-  transition: opacity .8s ease;
-  z-index: 0;
+  transition: opacity 1.2s ease;
+  will-change: opacity;
 }
 
 .slideshow__slide.is-active {
   opacity: 1;
 }
 
-/* Home intro text block (.home-intro) shown on Gallery view switch */
-.home-intro {
-  align-self: flex-start;
-  padding-inline: var(--gap);
-  width: 100%;
-  max-width: 60rem;
-  text-align: left;
-  margin: 2.75rem 0 3.25rem;
+.slideshow__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.15) 0%,
+    rgba(0, 0, 0, 0.45) 50%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
 }
 
-.home-title {
-  font-size: clamp(2rem, 1.4vw + 1.6rem, 2.75rem);
-  font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: .85rem;
-  letter-spacing: -0.5px;
+.slideshow__content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: 0 clamp(1.5rem, 5vw, 4rem) clamp(3rem, 8vh, 5rem);
 }
 
-.home-bio {
-  font-size: clamp(1rem, .4vw + .95rem, 1.15rem);
+.slideshow__title {
+  font-size: clamp(1.4rem, 3vw + 0.5rem, 2.5rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.slideshow__sub {
+  font-size: clamp(0.95rem, 1.2vw + 0.5rem, 1.3rem);
   font-weight: 300;
-  line-height: 1.55;
-  max-width: 55ch;
-  color: rgba(0, 0, 0, .85);
+  font-style: italic;
+  color: rgba(255, 255, 255, .6);
+  letter-spacing: 0.02em;
+  margin-bottom: 1.75rem;
+}
+
+.slideshow__cta {
+  background: none;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, .3);
+  padding: 0.65rem 2.25rem;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color .3s, background .3s, letter-spacing .3s;
+}
+
+.slideshow__cta:hover {
+  border-color: rgba(255, 255, 255, .7);
+  background: rgba(255, 255, 255, .08);
+  letter-spacing: 0.2em;
 }
 
 @media (max-width: 599px) {
-  .home-intro {
-    padding-inline: clamp(1rem, 5vw, 1.5rem);
-    margin: 2rem 0;
-  }
-
-  .home-title {
-    font-size: clamp(1.55rem, 4.5vw, 2rem);
-  }
-
-  .home-bio {
-    font-size: clamp(.95rem, 3.5vw, 1.05rem);
-  }
+  .slideshow__title { font-size: clamp(1.8rem, 8vw, 2.5rem); }
+  .slideshow__sub { font-size: 0.9rem; margin-bottom: 1.25rem; }
+  .slideshow__content { padding: 0 1.25rem calc(env(safe-area-inset-bottom, 0px) + 2rem); }
+  .slideshow__cta { padding: 0.55rem 1.75rem; font-size: 0.75rem; }
 }
 
-/* Gallery section wrapper (.gallery) and divider lines */
 .gallery {
-  padding-block: var(--gap);
-  padding-inline: calc(var(--gap) * 0.5);
+  padding: var(--gap);
 }
 
-.gallery .filter-wrap,
-.gallery .grid {
-  padding-inline: calc(var(--gap) * 0.5);
-}
-
-.divider,
-.gallery .divider,
-.site-footer .divider {
-  display: block;
-  height: 1px;
-  width: 90%;
-  margin: 0 auto 1rem;
-  background: rgba(0, 0, 0, .12);
-  opacity: .4;
-  border-radius: 1px;
-}
-
-/* Filter wrap container and fade overlay (.filter-wrap, .filter-fade) */
-.filter-wrap {
-  position: relative;
-  margin-bottom: 2.4rem;
-  overflow: visible;
-}
-
-.filter {
-  display: flex;
-  overflow-x: auto;
-  overflow-y: visible;
-  touch-action: pan-x;
-  gap: .75rem;
-  padding: .4rem calc(var(--gap) + 6rem) .4rem var(--gap);
-  scroll-behavior: smooth;
-}
-
-.filter-fade {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 6rem;
-  height: 100%;
-  pointer-events: none;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0) 10%, var(--white) 90%);
-}
-
-/* Mosaic layout for card components (.grid) */
 .grid {
-  columns: 1;
+  columns: 2;
   column-gap: var(--gap);
 }
 
-.grid>* {
+.grid__item {
   break-inside: avoid;
   margin-bottom: var(--gap);
-}
-
-@media (min-width: 600px) {
-  .grid {
-    columns: 2;
-  }
-}
-
-@media (min-width: 900px) {
-  .grid {
-    columns: 3;
-  }
-}
-
-/* Card components (.card, .card__img, .card__body, etc.) */
-.card {
-  background: var(--white);
-  border-radius: var(--radius-card);
+  cursor: pointer;
   overflow: hidden;
-  box-shadow: var(--shadow-card);
 }
 
-.card__img {
+.grid__item img {
   width: 100%;
   height: auto;
   display: block;
   opacity: 0;
-  transition: opacity .4s ease-in-out;
+  transition: opacity .4s ease-in-out, transform .3s ease;
 }
 
-.card__img.is-loaded {
+.grid__item img.is-loaded {
   opacity: 1;
 }
 
-.card__body {
-  padding: 1rem var(--gap) 1.25rem;
+.grid__item:hover img {
+  transform: scale(1.02);
 }
 
-.card__title {
-  font-family: inherit;
-  font-weight: 700;
-  margin-bottom: .25rem;
-  font-size: clamp(.95rem, .5vw + .75rem, 1.05rem);
-}
+@media (max-width: 599px) { .grid { columns: 2; } }
+@media (min-width: 600px) { .grid { columns: 2; } }
+@media (min-width: 900px) { .grid { columns: 3; } }
 
-.card__meta {
-  font-size: .78rem;
-  opacity: .8;
-  margin-bottom: .25rem;
-}
-
-.card__date {
-  font-size: .73rem;
-  font-weight: 500;
-  opacity: .6;
-  text-align: right;
-  display: block;
-}
-
-/* Footer component (.site-footer) */
-.site-footer {
-  padding: 4rem var(--gap) 3rem;
-  text-align: center;
-  font-size: .85rem;
-  color: rgba(0, 0, 0, .7);
-}
-
-.footer-text {
-  letter-spacing: .02em;
-}
-
-.footer-text a {
-  color: inherit !important;
-  text-decoration: none !important;
-}
-
-/* About section styling (.about) for About view */
 .about {
-  max-width: 60ch;
+  max-width: 55ch;
   margin: 0 auto;
-  padding: calc(var(--gap) * 1.5) var(--gap) 2rem;
-  max-height: none;
-  overflow: visible;
+  padding: 4rem 1.5rem 3rem;
 }
 
 .about p {
-  font-size: .95rem;
+  font-size: 1.05rem;
   font-weight: 300;
-  line-height: 1.6;
+  line-height: 1.75;
   margin-bottom: 1.5em;
+  color: rgba(255, 255, 255, .65);
 }
 
 @media (max-width: 599px) {
-  .about {
-    padding: calc(var(--gap) * 2) calc(var(--gap) * 1.75);
-  }
+  .about { padding: 2rem 1.25rem 1.5rem; }
+  .about p { font-size: 0.95rem; line-height: 1.65; }
 }
 
-/* Lightbox modal structure for image preview in React state */
+.site-footer {
+  padding: 1.5rem 1rem 1rem;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.footer-text a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .image-modal {
   position: fixed;
   top: 0;
@@ -460,7 +269,7 @@
 .image-modal__overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.95);
 }
 
 .image-modal__content {
@@ -479,34 +288,32 @@
   transform: translateY(-50%);
   background: none;
   border: none;
-  color: #fff;
-  display: none;
+  color: rgba(255, 255, 255, .5);
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 998;
+  transition: color .2s;
+  padding: 1rem;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.image-modal__nav--left {
-  left: 1rem;
+.image-modal__nav:hover {
+  color: rgba(255, 255, 255, .9);
 }
 
-.image-modal__nav--right {
-  right: 1rem;
-}
-
-.image-modal__nav:hover {}
+.image-modal__nav--left  { left: 0.25rem; }
+.image-modal__nav--right { right: 0.25rem; }
 
 .image-modal__nav svg {
   width: 1.35rem;
   height: 1.35rem;
 }
 
-/* Desktop-only: show nav chevrons */
-@media (min-width: 900px) {
-  .image-modal__nav {
-    display: inline-flex;
-  }
+@media (max-width: 599px) {
+  .image-modal__nav svg { width: 1.1rem; height: 1.1rem; }
+  .image-modal__content img { max-width: 96vw; max-height: 85vh; }
 }
 
 .image-modal__content img {
@@ -515,15 +322,9 @@
   object-fit: contain;
 }
 
-/* Subtle fade-in when opening the image modal */
 @keyframes modalFadeIn {
-  from {
-    opacity: 0
-  }
-
-  to {
-    opacity: 1
-  }
+  from { opacity: 0 }
+  to   { opacity: 1 }
 }
 
 .image-modal,
@@ -532,15 +333,8 @@
 }
 
 @keyframes modalImageIn {
-  from {
-    opacity: 0;
-    transform: scale(.995)
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1)
-  }
+  from { opacity: 0; transform: scale(.995) }
+  to   { opacity: 1; transform: scale(1) }
 }
 
 .image-modal__content img {
@@ -549,58 +343,41 @@
   animation: modalImageIn .28s ease forwards;
 }
 
-/* Ensure the close icon matches chevron size */
 .image-modal__close svg {
   width: 1.35rem;
   height: 1.35rem;
 }
 
-/* Close button for modal with safe-area inset support */
-/* ── modal close button ── */
 .image-modal__close {
   position: fixed;
-
-  /* 1 rem gutter + any notch / punch-hole inset */
   top: calc(env(safe-area-inset-top, 0px) + 0.5rem);
   right: calc(env(safe-area-inset-right, 0px) + 0.5rem);
-
-  /* larger tap target without affecting the glyph size */
   width: 3.25rem;
   height: 3.25rem;
   display: flex;
   align-items: center;
   justify-content: center;
-
   background: none;
   border: none;
-  color: #fff;
-
-  /* scales from phones to 4 K monitors */
+  color: rgba(255, 255, 255, .6);
   font-size: clamp(1.75rem, 3vw, 3rem);
-
   line-height: 1;
   cursor: pointer;
   z-index: 999;
   touch-action: manipulation;
-  /* avoids 300 ms delay on mobile */
+  transition: color .2s;
 }
 
-/* Empty state messaging inside Gallery when no filtered items */
-.empty-state {
-  max-width: 60ch;
-  margin: 2.5rem auto 3rem;
-  padding: 0 var(--gap);
-  text-align: center;
-  color: rgba(0, 0, 0, .7);
+.image-modal__close:hover {
+  color: rgba(255, 255, 255, 1);
 }
 
-.empty-state__title {
-  font-weight: 700;
-  font-size: clamp(1.15rem, .6vw + 1rem, 1.5rem);
-  margin-bottom: .5rem;
-}
-
-.empty-state__text {
-  font-size: .95rem;
-  line-height: 1.6;
+.visually-hidden {
+  position: absolute;
+  inset: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
 }
